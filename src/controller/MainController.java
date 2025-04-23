@@ -38,7 +38,7 @@ public class MainController {
 
     private static void librarianMenu(LibraryService service, Scanner sc) {
         while (true) {
-            System.out.println("\nLibrarian Menu:\n1. Add Book\n2. Remove Book\n3. Issue Book\n4. Approve Library Card\n5. View All Books\n6. Back");
+            System.out.println("\nLibrarian Menu:\n1. Add Book\n2. Remove Book\n3. Issue Book\n4. Approve Library Card\n5. View All Books\n6. Return Book\n7. Back");
             int opt = sc.nextInt();
             switch (opt) {
                 case 1 -> {
@@ -61,7 +61,11 @@ public class MainController {
                     service.approveLibraryCard(sc.next());
                 }
                 case 5 -> service.viewBooks();
-                case 6 -> { return; }
+                case 6 -> {
+                    System.out.print("Enter Book ID to return: ");
+                    service.returnBook(sc.next());
+                }
+                case 7 -> { return; }
                 default -> System.out.println("Invalid option");
             }
         }
