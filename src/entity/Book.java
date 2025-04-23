@@ -17,10 +17,10 @@ public class Book {
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
     public boolean isIssued() { return isIssued; }
-    public void setIssued(boolean issued) { isIssued = issued; }
+    public void setIssued(boolean issued) { this.isIssued = issued; }
 
     @Override
     public String toString() {
-        return "[" + bookId + "] " + title + " by " + author + (isIssued ? " (Issued)" : "");
+        return "[" + bookId + "] " + title + " by " + author + (isIssued ? " (Issued)" : " (Available)");
     }
 }
