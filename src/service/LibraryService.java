@@ -49,7 +49,11 @@ public class LibraryService {
             historyRepo.log(studentId, bookId);
             System.out.println("Book issued successfully.");
         } else {
-            System.out.println("Cannot issue book. Check eligibility or availability.");
+            System.out.println("Cannot issue book. "+
+                (book == null ? "Book not found." : "") +
+                (student == null ? " Student not found." : "") +
+                (!student.hasLibraryCard() ? " Student does not have a library card." : "") +
+                (book.isIssued() ? " Book already issued." : ""));
         }
     }
 
