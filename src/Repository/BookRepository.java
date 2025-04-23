@@ -14,6 +14,10 @@ public class BookRepository {
         return books.get(id);
     }
 
+    public int size() {
+        return books.size();
+    }
+
     public boolean exists(String id) {
         return books.containsKey(id);
     }

@@ -31,6 +31,11 @@ public class LibraryService {
     }
 
     public void viewBooks() {
+        if (bookRepo.size() == 0) {
+            System.out.println("No books available.");
+            return;
+            
+        }
         for (Book book : bookRepo.getAllBooks()) {
             System.out.println(book);
         }
