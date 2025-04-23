@@ -86,4 +86,13 @@ public class LibraryService {
             System.out.println("Student not found.");
         }
     }
+    public void returnBook(String bookId) {
+    Book book = bookRepo.getBook(bookId);
+    if (book != null && book.isIssued()) {
+        book.setIssued(false);
+        System.out.println("Book returned successfully.");
+    } else {
+        System.out.println("Invalid book ID or book was not issued.");
+    }
+}
 }
