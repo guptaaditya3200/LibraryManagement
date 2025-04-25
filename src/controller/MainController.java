@@ -42,11 +42,12 @@ public class MainController {
             int opt = sc.nextInt();
             switch (opt) {
                 case 1 -> {
-                    System.out.print("Enter Book ID, Title, Author: ");
+                    System.out.print("Enter Book ID, Title, Author, Price: ");
                     String bid = sc.next();
                     String title = sc.next();
                     String author = sc.next();
-                    service.addBook(new Book(bid, title, author));
+                    double price = sc.nextDouble();
+                    service.addBook(new Book(bid, title, author,price));
                 }
                 case 2 -> {
                     System.out.print("Enter Book ID to remove: ");
@@ -60,7 +61,11 @@ public class MainController {
                     System.out.print("Enter Student ID: ");
                     service.approveLibraryCard(sc.next());
                 }
-                case 5 -> service.viewBooks();
+                case 5 -> {
+                    System.out.print("Sort by (id/title/author/price): ");
+                    String sort = sc.next();
+                    service.viewBooks(sort);
+                }                
                 case 6 -> {
                     System.out.print("Enter Book ID to return: ");
                     service.returnBook(sc.next());
@@ -78,7 +83,11 @@ public class MainController {
             switch (opt) {
                 case 1 -> service.viewStudentProfile(sid);
                 case 2 -> service.requestLibraryCard(sid);
-                case 3 -> service.viewBooks();
+                case 3 -> {
+                    System.out.print("Sort by (id/title/author/price): ");
+                    String sort = sc.next();
+                    service.viewBooks(sort);
+                }
                 case 4 -> { return; }
                 default -> System.out.println("Invalid option");
             }

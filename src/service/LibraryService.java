@@ -21,25 +21,40 @@ public class LibraryService {
     }
 
     public void addBook(Book book) {
+        if (bookRepo.exists(book.getBookId())) {
+            System.out.println("Book ID already exists. Choose a unique ID.");
+            return;
+        }
         bookRepo.addBook(book);
         System.out.println("Book added.");
     }
+    
 
     public void removeBook(String id) {
         bookRepo.removeBook(id);
         System.out.println("Book removed.");
     }
 
-    public void viewBooks() {
-        if (bookRepo.size() == 0) {
-            System.out.println("No books available.");
-            return;
-            
+    public void viewBooks(String sortOption) {
+        List<Book> books = new ArrayList<>(bookRepo.getAllBooks());
+    
+        switch (sortOption.toLowerCase()) {
+            case "id" -> books.sort(Comparator.comparing(Book::getBookId));
+            case "title" -> books.sort(Comparator.comparing(Book::getTitle));
+            case "price" -> books.sort(Comparator.comparingDouble(Book::getPrice));
+            case "author" -> books.sort(Comparator.comparing(Book::getAuthor));
+            default -> System.out.println("Invalid sort option. Showing unsorted list.");
         }
-        for (Book book : bookRepo.getAllBooks()) {
-            System.out.println(book);
+    
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+        } else {
+            for (Book book : books) {
+                System.out.println(book);
+            }
         }
     }
+    
 
     public void issueBook(String bookId, String studentId) {
         Book book = bookRepo.getBook(bookId);
