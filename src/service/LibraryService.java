@@ -39,10 +39,10 @@ public class LibraryService {
         List<Book> books = new ArrayList<>(bookRepo.getAllBooks());
     
         switch (sortOption.toLowerCase()) {
-            case "id" -> books.sort(Comparator.comparing(Book::getBookId));
-            case "title" -> books.sort(Comparator.comparing(Book::getTitle));
-            case "price" -> books.sort(Comparator.comparingDouble(Book::getPrice));
-            case "author" -> books.sort(Comparator.comparing(Book::getAuthor));
+            case "id" -> books.sort((b1, b2) -> b1.getBookId().compareTo(b2.getBookId()));
+            case "title" -> books.sort((b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));
+            case "price" -> books.sort((b1, b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
+            case "author" -> books.sort((b1, b2) -> b1.getAuthor().compareTo(b2.getAuthor()));
             default -> System.out.println("Invalid sort option. Showing unsorted list.");
         }
     
